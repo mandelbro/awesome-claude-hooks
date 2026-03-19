@@ -1,0 +1,6 @@
+{
+  "description": "Hook system configuration placeholder",
+  "notes": {
+    "secrets-check": "Bash must be included in the secrets-check matcher pattern (Write|Edit|MultiEdit|Bash) for command-level secret scanning to work."
+  }
+}
