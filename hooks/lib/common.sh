@@ -24,20 +24,16 @@ parse_input() {
   HOOK_INPUT="$(cat)"
   require_jq || return 1
 
-  local parsed
-  parsed="$(echo "$HOOK_INPUT" | jq -r '
-    [
-      (.tool_name // "" | @sh),
-      (.tool_input.file_path // "" | @sh),
-      (.session_id // "" | @sh),
-      (.cwd // "" | @sh)
-    ] | join(" ")
-  ' 2>/dev/null)" || { echo "Error: failed to parse input JSON" >&2; return 1; }
+  HOOK_TOOL_NAME="$(echo "$HOOK_INPUT" | jq -r '.tool_name // ""' 2>/dev/null)" || true
+  HOOK_FILE_PATH="$(echo "$HOOK_INPUT" | jq -r '.tool_input.file_path // ""' 2>/dev/null)" || true
+  HOOK_SESSION_ID="$(echo "$HOOK_INPUT" | jq -r '.session_id // ""' 2>/dev/null)" || true
+  HOOK_CWD="$(echo "$HOOK_INPUT" | jq -r '.cwd // ""' 2>/dev/null)" || true
 
-  eval "HOOK_TOOL_NAME=${parsed%% *}"; parsed="${parsed#* }"
-  eval "HOOK_FILE_PATH=${parsed%% *}"; parsed="${parsed#* }"
-  eval "HOOK_SESSION_ID=${parsed%% *}"; parsed="${parsed#* }"
-  eval "HOOK_CWD=${parsed}"
+  # Validate we got valid JSON (at least one field should parse)
+  if [ -z "$HOOK_INPUT" ] || ! echo "$HOOK_INPUT" | jq empty 2>/dev/null; then
+    echo "Error: failed to parse input JSON" >&2
+    return 1
+  fi
 }
 
 extract_content() {
