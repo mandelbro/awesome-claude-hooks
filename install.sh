@@ -116,9 +116,18 @@ if ! $HOOKS_ONLY; then
     SETTINGS_BACKUP="${SETTINGS_FILE}.bak.$(date +%Y%m%d-%H%M%S)"
     cp "$SETTINGS_FILE" "$SETTINGS_BACKUP"
 
-    # Atomic merge: write to temp, then mv
+    # Atomic merge: append new hook entries per lifecycle event (preserves existing)
     TMP_SETTINGS="$(mktemp)"
-    if jq -s '.[0] * .[1]' "$SETTINGS_FILE" "$CONFIG_SRC" > "$TMP_SETTINGS" 2>/dev/null; then
+    if jq -s '.[0] as $base | .[1] as $new |
+      $base * {hooks: (
+        ($base.hooks // {}) as $bh | ($new.hooks // {}) |
+        to_entries | reduce .[] as $e ($bh;
+          .[$e.key] = ((.[$e.key] // []) + [$e.value[] |
+            select(.hooks[0].command as $cmd |
+              [$bh[$e.key] // [] | .[].hooks[]?.command] |
+              index($cmd) | not)])
+        )
+      )}' "$SETTINGS_FILE" "$CONFIG_SRC" > "$TMP_SETTINGS" 2>/dev/null; then
       # Validate the merged JSON
       if jq empty "$TMP_SETTINGS" 2>/dev/null; then
         mv "$TMP_SETTINGS" "$SETTINGS_FILE"
