@@ -1,0 +1,9 @@
+{
+  "tool_name": "Edit",
+  "tool_input": {
+    "file_path": "/project/src/auth/login.py",
+    "new_string": "def authenticate(username, password_hash):\n    user = find_user(username)\n    return verify_hash(user.stored_hash, password_hash)\n"
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}

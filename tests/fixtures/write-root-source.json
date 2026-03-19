@@ -1,0 +1,9 @@
+{
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/project/app.py",
+    "content": "from flask import Flask\napp = Flask(__name__)\n"
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}

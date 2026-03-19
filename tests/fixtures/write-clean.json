@@ -1,0 +1,9 @@
+{
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/project/src/utils/helpers.py",
+    "content": "def format_date(dt):\n    return dt.strftime('%Y-%m-%d')\n\ndef slugify(text):\n    return text.lower().replace(' ', '-')\n"
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}

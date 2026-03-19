@@ -1,0 +1,9 @@
+{
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/project/.env",
+    "content": "DATABASE_URL=postgres://user:password@localhost:5432/mydb\nREDIS_URL=redis://localhost:6379\n"
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}

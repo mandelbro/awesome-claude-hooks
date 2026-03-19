@@ -1,0 +1,9 @@
+{
+  "tool_name": "Edit",
+  "tool_input": {
+    "file_path": "/project/src/config/certs.py",
+    "new_string": "PRIVATE_KEY = '''-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEA0Z3VS5JJcds3xfn/ygWyF8PbnGy5AoV1B\n-----END RSA PRIVATE KEY-----'''\n"
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}
