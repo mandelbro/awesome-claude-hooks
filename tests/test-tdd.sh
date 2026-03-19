@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Tests for hooks/tdd-tracker.sh and hooks/tdd-reminder.sh
 # Validates TDD tracking and reminder behavior.
 

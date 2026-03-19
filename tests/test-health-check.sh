@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Tests for hooks/hook-health-check.sh
 # Validates that the health check hook reports status correctly.
 

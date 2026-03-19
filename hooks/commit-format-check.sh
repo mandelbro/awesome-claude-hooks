@@ -35,7 +35,7 @@ if [ -z "$COMMIT_MSG" ]; then
   exit 0
 fi
 
-COMMIT_MSG=$(echo "$COMMIT_MSG" | sed 's/^[[:space:]]*//')
+COMMIT_MSG="${COMMIT_MSG#"${COMMIT_MSG%%[![:space:]]*}"}"
 PATTERN='^(feat|fix|refactor|test|docs|style|chore|build|ci)(\([a-zA-Z0-9_./-]+\))?: .+'
 echo "$COMMIT_MSG" | grep -qE "$PATTERN" && exit 0
 

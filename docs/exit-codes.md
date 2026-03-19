@@ -70,3 +70,17 @@ Within a lifecycle event, hooks run in the order listed in `settings.json`. For 
 This means ordering matters: place the most critical blocking hooks (e.g., `secrets-check.sh`) before advisory hooks. A blocked secret write correctly prevents the commit format checker from running.
 
 Hook ordering is configured in `config/settings-hooks.json`.
+
+## Common Mistakes
+
+1. **Using `exit 1` to block in PreToolUse:** Exit 1 means "hook crashed" and the action is **allowed**. Use `exit 2` to block.
+2. **Using `parse_input || exit 0` in a security hook:** If JSON parsing fails in a PreToolUse hook, `exit 0` allows the action unchecked. Use `parse_input || exit 2` instead.
+3. **Forgetting `guard_stop_loop` in Stop hooks:** Omitting this causes infinite recursion when the hook produces output.
+4. **Expecting PostToolUse to block:** Only PreToolUse can block. PostToolUse exit codes are ignored; the action has already completed.
+
+## The `parse_input` Safety Decision
+
+Each hook must decide what happens when `parse_input` fails (bad JSON, missing jq):
+
+- **Security hooks (PreToolUse):** Use `parse_input || exit 2` to block when safety cannot be verified.
+- **Advisory hooks (all others):** Use `parse_input || exit 0` to fail silently rather than crash.

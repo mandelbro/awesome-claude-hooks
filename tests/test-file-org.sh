@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Tests for hooks/file-org-check.sh
 # Validates that source files in the project root are blocked and nested files are allowed.
 

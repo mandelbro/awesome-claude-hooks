@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Tests for hooks/secrets-check.sh
 # Validates that secret patterns are blocked and clean content is allowed.
 

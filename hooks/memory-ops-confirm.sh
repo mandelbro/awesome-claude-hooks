@@ -54,15 +54,15 @@ case "$HOOK_TOOL_NAME" in
     echo "[MEMORY OK] pi-brain: drift check executed"
     ;;
   mcp__pi-brain__brain_page_*)
-    ACTION=$(echo "$HOOK_TOOL_NAME" | sed 's/mcp__pi-brain__brain_page_//')
+    ACTION="${HOOK_TOOL_NAME#mcp__pi-brain__brain_page_}"
     echo "[MEMORY OK] pi-brain: brainpedia page ${ACTION} executed"
     ;;
   mcp__pi-brain__brain_*)
-    ACTION=$(echo "$HOOK_TOOL_NAME" | sed 's/mcp__pi-brain__brain_//')
+    ACTION="${HOOK_TOOL_NAME#mcp__pi-brain__brain_}"
     echo "[MEMORY OK] pi-brain: ${ACTION} executed"
     ;;
   mcp__graphiti-memory__*)
-    ACTION=$(echo "$HOOK_TOOL_NAME" | sed 's/mcp__graphiti-memory__//')
+    ACTION="${HOOK_TOOL_NAME#mcp__graphiti-memory__}"
     echo "[MEMORY OK] graphiti-memory: ${ACTION} executed"
     ;;
   *)

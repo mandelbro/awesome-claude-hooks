@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Tests for hooks/commit-format-check.sh
 # Validates conventional commit message enforcement.
 
