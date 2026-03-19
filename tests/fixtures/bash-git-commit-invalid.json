@@ -1,0 +1,8 @@
+{
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "git commit -m \"updated some stuff\""
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}

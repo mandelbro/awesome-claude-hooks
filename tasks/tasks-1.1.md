@@ -16,7 +16,7 @@ Establishes the settings schema baseline, copies existing hooks, builds the shar
 
 - **Title**: Reconcile settings.json schema with actual Claude Code format
 - **File**: docs/settings-schema-reference.md
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a hook developer, I want a documented reference of the actual Claude Code settings.json hook schema, so that the installer, uninstaller, and all config references use the correct format and do not produce broken configuration.
@@ -74,7 +74,7 @@ Establishes the settings schema baseline, copies existing hooks, builds the shar
 
 - **Title**: Copy existing hook scripts into repository as baseline
 - **File**: hooks/
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 1
 
 - **User Story (business-facing)**: As a hook developer, I want the existing hook scripts copied into the repository as-is, so that baseline tests can validate current behavior before any modifications begin.
@@ -184,7 +184,7 @@ Establishes the settings schema baseline, copies existing hooks, builds the shar
 
 - **Title**: Create test framework runner
 - **File**: tests/run-tests.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a hook developer, I want a test runner that discovers and executes test functions from test files, so that I can validate hook behavior without running a full Claude Code session.
@@ -251,7 +251,7 @@ Establishes the settings schema baseline, copies existing hooks, builds the shar
 
 - **Title**: Create test fixture JSON files
 - **File**: tests/fixtures/
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a hook developer, I want representative JSON fixture files for each Claude Code lifecycle event, so that I can test hooks against realistic input without running a live session.

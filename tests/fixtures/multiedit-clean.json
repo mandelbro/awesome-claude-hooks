@@ -1,0 +1,18 @@
+{
+  "tool_name": "MultiEdit",
+  "tool_input": {
+    "file_path": "/project/src/models/user.py",
+    "edits": [
+      {
+        "old_string": "name: str",
+        "new_string": "name: str\n    email: str"
+      },
+      {
+        "old_string": "def __repr__",
+        "new_string": "def __str__(self):\n        return self.name\n\n    def __repr__"
+      }
+    ]
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}
