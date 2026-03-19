@@ -16,7 +16,7 @@ Phase 2 concludes with the TDD naming-convention spike and Phase 2 regression te
 
 - **Title**: Spike: TDD naming-convention matcher design
 - **File**: docs/spike-tdd-naming-convention.md
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a hook developer, I want a documented design for correlating source files to their test files by naming convention, so that the TDD system can detect when a specific source file lacks a corresponding test (not just any test).
@@ -73,7 +73,7 @@ Produce a spike document that covers:
 
 - **Title**: Write regression tests for Phase 2 fixes
 - **File**: tests/test-commit.sh, tests/test-tdd.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a hook developer, I want regression tests for the commit format and TDD tracker fixes, so that Phase 2 improvements are protected against future regressions.

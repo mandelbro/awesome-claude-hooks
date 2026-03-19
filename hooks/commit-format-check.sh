@@ -20,26 +20,48 @@ if echo "$COMMAND" | grep -q '\-\-amend' && ! echo "$COMMAND" | grep -q '\-m'; t
 fi
 
 # Extract commit message from -m flag
-# Handle: -m "message", -m 'message', -m "$(cat <<'EOF'...EOF)"
+# Handle: -m "msg", -m 'msg', --message="msg", --message "msg",
+#         -am "msg", -cm "msg", -m "$(cat <<'EOF'...EOF)"
 COMMIT_MSG=""
 
 # Try heredoc pattern first: -m "$(cat <<'EOF' ... EOF )"
 if echo "$COMMAND" | grep -qE 'cat <<'; then
-  # Extract content between EOF markers
-  COMMIT_MSG=$(echo "$COMMAND" | sed -n "/cat <<['\"]\\{0,1\\}EOF/,/EOF/p" | head -1 | sed "s/.*cat <<['\"]\\{0,1\\}EOF['\"]\\{0,1\\}//")
-  if [ -z "$COMMIT_MSG" ]; then
-    # Multi-line heredoc — extract the first non-empty line after EOF marker
-    COMMIT_MSG=$(echo "$COMMAND" | awk '/cat <</{found=1; next} found && /^[[:space:]]*[^[:space:]]/{print; exit}')
-  fi
+  # Extract the first non-empty content line between EOF markers
+  COMMIT_MSG=$(echo "$COMMAND" | awk '
+    /cat <</ { found=1; next }
+    found && /^[[:space:]]*EOF/ { exit }
+    found && /^[[:space:]]*$/ { next }
+    found && /^[[:space:]]*[^[:space:]]/ { sub(/^[[:space:]]+/, ""); print; exit }
+  ')
+fi
+
+# Quote character class for matching both " and '
+Q='["'"'"']'     # matches " or '
+NQ='[^"'"'"']'   # matches anything except " or '
+
+# Try --message="message" (long flag with equals)
+if [ -z "$COMMIT_MSG" ]; then
+  COMMIT_MSG=$(echo "$COMMAND" | grep -oE "\-\-message=${Q}(${NQ}+)${Q}" | head -1 | sed "s/--message=[\"']//;s/[\"']$//")
+fi
+
+# Try --message "message" (long flag with space)
+if [ -z "$COMMIT_MSG" ]; then
+  COMMIT_MSG=$(echo "$COMMAND" | grep -oE "\-\-message ${Q}(${NQ}+)${Q}" | head -1 | sed "s/--message [\"']//;s/[\"']$//")
+fi
+
+# Try combined flags: -am "message", -cm "message"
+if [ -z "$COMMIT_MSG" ]; then
+  COMMIT_MSG=$(echo "$COMMAND" | grep -oE "\-[a-z]*m ${Q}(${NQ}+)${Q}" | head -1 | sed "s/-[a-z]*m [\"']//;s/[\"']$//")
 fi
 
 # Try simple -m "message" or -m 'message'
 if [ -z "$COMMIT_MSG" ]; then
-  COMMIT_MSG=$(echo "$COMMAND" | grep -oE '\-m ["\x27]([^"\x27]+)["\x27]' | head -1 | sed "s/-m [\"']//;s/[\"']$//")
+  COMMIT_MSG=$(echo "$COMMAND" | grep -oE "\-m ${Q}(${NQ}+)${Q}" | head -1 | sed "s/-m [\"']//;s/[\"']$//")
 fi
 
-# If we couldn't extract a message, let it through (might be interactive or complex)
+# If we couldn't extract a message, degrade to permissive (warn, don't block)
 if [ -z "$COMMIT_MSG" ]; then
+  echo "Warning: could not extract commit message from command; allowing through." >&2
   exit 0
 fi
 

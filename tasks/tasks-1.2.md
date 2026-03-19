@@ -182,7 +182,7 @@ Document that the secrets-check matcher in `config/settings-hooks.json` (created
 
 - **Title**: Fix commit format edge cases
 - **File**: hooks/commit-format-check.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a Claude Code user, I want the commit format checker to handle --message= flags, combined flags (-am), and heredoc messages, so that valid conventional commits are not silently bypassed.
@@ -236,7 +236,7 @@ Document that the secrets-check matcher in `config/settings-hooks.json` (created
 
 - **Title**: Fix TDD tracker clear-on-stop behavior
 - **File**: hooks/tdd-tracker.sh, hooks/tdd-reminder.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a Claude Code user, I want the TDD tracker to maintain a rolling window of file operations instead of clearing on every stop, so that multi-response coding cycles do not produce false negative TDD reminders.
