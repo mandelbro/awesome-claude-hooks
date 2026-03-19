@@ -345,8 +345,8 @@ Structure the README with these sections:
 2. **Overview**: Brief explanation of the 4-layer hook architecture (2-3 paragraphs)
 3. **Quick Start**:
    ```bash
-   git clone https://github.com/mandelbro/user-claude-hooks.git
-   cd user-claude-hooks
+   git clone git@github.com:mandelbro/awesome-claude-hooks.git
+   cd awesome-claude-hooks
    ./install.sh
    ```
 4. **Hook Reference Table**: All 11 hooks with lifecycle event, matcher, blocking status, and one-line description (use the table from Section 1 as a base)

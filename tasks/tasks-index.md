@@ -6,7 +6,7 @@
 - **Total Points**: 83
 - **Points Complete**: 83
 
-## Project: Claude Code Hooks System (user-claude-hooks)
+## Project: Claude Code Hooks System (awesome-claude-hooks)
 
 - Task Source File: `docs/discovery/discovery-hooks-improvements.md`
 - **Description**: Implementable Claude Code hooks system with shared utilities, test framework, security improvements, and installer for public distribution. Companion repository to the "Your CLAUDE.md Is a Suggestion. Hooks Make It Law" article.

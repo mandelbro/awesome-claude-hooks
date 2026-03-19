@@ -1,4 +1,4 @@
-# Claude Code User Hooks
+# Awesome Claude Code Hooks
 
 A production-ready, 4-layer hook system for Claude Code that enforces coding standards, catches secrets, and keeps your workflow honest.
 
@@ -16,8 +16,8 @@ Claude Code supports user-level hooks that run at key points during a session. T
 ## Quick Start
 
 ```bash
-git clone https://github.com/your-org/user-claude-hooks.git
-cd user-claude-hooks
+git clone git@github.com:mandelbro/awesome-claude-hooks.git
+cd awesome-claude-hooks
 bash install.sh --force
 ```
 
