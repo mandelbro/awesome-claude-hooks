@@ -159,11 +159,11 @@ test_idempotent_install() {
   # Run install twice
   HOME="$FAKE_HOME" bash "$REPO_DIR/install.sh" --force >/dev/null 2>&1
   local first_checksum
-  first_checksum=$(cat "$FAKE_HOME/.claude/hooks/secrets-check.sh" | md5 2>/dev/null || md5sum "$FAKE_HOME/.claude/hooks/secrets-check.sh" 2>/dev/null | awk '{print $1}')
+  first_checksum=$(md5sum "$FAKE_HOME/.claude/hooks/secrets-check.sh" 2>/dev/null | awk '{print $1}' || md5 -q "$FAKE_HOME/.claude/hooks/secrets-check.sh" 2>/dev/null)
 
   HOME="$FAKE_HOME" bash "$REPO_DIR/install.sh" --force >/dev/null 2>&1
   local second_checksum
-  second_checksum=$(cat "$FAKE_HOME/.claude/hooks/secrets-check.sh" | md5 2>/dev/null || md5sum "$FAKE_HOME/.claude/hooks/secrets-check.sh" 2>/dev/null | awk '{print $1}')
+  second_checksum=$(md5sum "$FAKE_HOME/.claude/hooks/secrets-check.sh" 2>/dev/null | awk '{print $1}' || md5 -q "$FAKE_HOME/.claude/hooks/secrets-check.sh" 2>/dev/null)
 
   # Content should be identical
   if [ "$first_checksum" = "$second_checksum" ]; then

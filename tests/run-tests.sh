@@ -15,7 +15,7 @@ ERRORS=""
 
 # --- Assert helpers (used by sourced test-*.sh files) ---
 
-# shellcheck disable=SC2329 # Invoked by sourced test files
+# shellcheck disable=SC2317,SC2329 # Invoked indirectly by sourced test files
 assert_exit() {
   local expected="$1" actual="$2" label="$3"
   if [ "$expected" = "$actual" ]; then
@@ -26,7 +26,7 @@ assert_exit() {
   fi
 }
 
-# shellcheck disable=SC2329 # Invoked by sourced test files
+# shellcheck disable=SC2317,SC2329 # Invoked indirectly by sourced test files
 assert_output_contains() {
   local needle="$1" haystack="$2" label="$3"
   if echo "$haystack" | grep -q "$needle"; then
@@ -37,7 +37,7 @@ assert_output_contains() {
   fi
 }
 
-# shellcheck disable=SC2329 # Invoked by sourced test files
+# shellcheck disable=SC2317,SC2329 # Invoked indirectly by sourced test files
 assert_output_not_contains() {
   local needle="$1" haystack="$2" label="$3"
   if echo "$haystack" | grep -q "$needle"; then
@@ -52,7 +52,7 @@ assert_output_not_contains() {
 # Runs a hook in a subshell so exit calls don't kill the runner.
 # Usage: run_hook <hook_script> <fixture_file>
 # Sets: RUN_EXIT (exit code), RUN_OUTPUT (combined stdout+stderr)
-# shellcheck disable=SC2329 # Invoked by sourced test files
+# shellcheck disable=SC2317,SC2329 # Invoked indirectly by sourced test files
 run_hook() {
   local hook_script="$1"
   local fixture_file="$2"
