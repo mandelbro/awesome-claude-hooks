@@ -1,0 +1,8 @@
+{
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "git commit -m \"$(cat <<'EOF'\nfeat(auth): add login flow\n\nImplements OAuth2 PKCE for SPA clients.\nEOF\n)\""
+  },
+  "session_id": "test-session-001",
+  "cwd": "/project"
+}
