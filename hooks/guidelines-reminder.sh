@@ -3,6 +3,7 @@
 # Runs on: SessionStart (startup|resume|compact), also sourced by pre-compact-guidelines.sh
 # Output goes to stdout → Claude Code injects it as a system-reminder.
 
+emit_guidelines() {
 cat <<'GUIDELINES'
 === ACTIVE USER GUIDELINES ===
 
@@ -59,5 +60,10 @@ EXTERNAL LIBRARIES (context7)
 
 === END GUIDELINES ===
 GUIDELINES
+}
 
-exit 0
+# Only auto-execute when run directly (not sourced)
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  emit_guidelines
+  exit 0
+fi
