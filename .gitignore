@@ -1,0 +1,11 @@
+dist/
+build/
+.env
+
+.hive-mind
+.claude-flow/agents.json
+.claude-flow/hive-mind/state.json
+.claude-flow/data/*
+.claude-flow/sessions/*
+
+.coverage
