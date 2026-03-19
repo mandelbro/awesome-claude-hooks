@@ -24,7 +24,7 @@ case "$FILENAME" in
   package.json | package-lock.json | \
   tsconfig*.json | vite.config.* | vitest.config.* | \
   *.toml | *.yaml | *.yml | *.json | *.cfg | *.ini | *.lock | \
-  *.sh | render.yaml | Procfile | runtime.txt | requirements*.txt)
+  *.sh | Procfile | runtime.txt | requirements*.txt)
     exit 0 ;;
 esac
 

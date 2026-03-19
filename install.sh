@@ -149,7 +149,7 @@ else
 fi
 
 # --- Step 6: Run tests ---
-if [ -f "$SCRIPT_DIR/tests/run-tests.sh" ] && ! $DRY_RUN; then
+if [ -f "$SCRIPT_DIR/tests/run-tests.sh" ] && ! $DRY_RUN && [ -z "${SKIP_POST_INSTALL_TESTS:-}" ]; then
   info "Running hook tests..."
   if bash "$SCRIPT_DIR/tests/run-tests.sh"; then
     info "All tests passed."

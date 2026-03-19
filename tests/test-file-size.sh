@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Tests for hooks/file-size-check.sh
 # PostToolUse hook — always exits 0, warns via stdout for large files.
 # Since fixtures reference non-existent paths, the hook exits early with no output.

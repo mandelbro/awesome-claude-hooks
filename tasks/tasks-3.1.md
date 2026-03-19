@@ -208,7 +208,7 @@ Configuration files, installer, uninstaller, and README for public distribution 
 
 - **Title**: Create installer integration tests
 - **File**: tests/test-installer.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a contributor, I want integration tests that validate the installer and uninstaller against real scenarios, so that packaging regressions are caught before release.
@@ -320,7 +320,7 @@ Configuration files, installer, uninstaller, and README for public distribution 
 
 - **Title**: Create README.md for the repository
 - **File**: README.md
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a reader of the hooks article, I want a clear README that explains what this repository is, how to install it, and how to customize it, so that I can get started quickly without reading the full article.

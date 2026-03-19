@@ -13,7 +13,7 @@ fi
 
 # Block writes to .env files
 case "$HOOK_FILE_PATH" in
-  *.env|*.env.*|*/.env|*/.env.*)
+  *.env|*.env.*)
     echo "BLOCKED: Writing to .env file ($HOOK_FILE_PATH)." >&2; exit 2 ;;
 esac
 

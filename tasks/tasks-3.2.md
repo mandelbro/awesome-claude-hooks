@@ -16,7 +16,7 @@ Documentation and CI for the public hooks repository.
 
 - **Title**: Create customization guide documentation
 - **File**: docs/customization.md
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a user who wants to add or modify hooks, I want a guide explaining the hook development patterns, so that I can extend the system with my own custom hooks.
@@ -85,7 +85,7 @@ Cover these topics:
 
 - **Title**: Complete exit-codes.md reference documentation
 - **File**: docs/exit-codes.md
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 1
 
 - **User Story (business-facing)**: As a hook developer, I want a quick reference for Claude Code hook exit code behavior, so that I choose the correct exit code for each lifecycle event without guessing.
@@ -130,7 +130,7 @@ Expand the document to include:
 
 - **Title**: Create troubleshooting guide
 - **File**: docs/troubleshooting.md
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a user experiencing issues with hooks, I want a troubleshooting guide covering common problems, so that I can diagnose and fix issues without reading the full discovery document.
@@ -198,7 +198,7 @@ Cover these common issues:
 
 - **Title**: Add CI workflow for test suite
 - **File**: .github/workflows/test.yml
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a contributor to the hooks repository, I want the test suite to run automatically on PRs and pushes, so that regressions are caught before merging.
@@ -252,7 +252,7 @@ Cover these common issues:
 
 - **Title**: Run ShellCheck across all scripts and fix findings
 - **File**: hooks/*.sh, hooks/lib/*.sh, tests/*.sh, install.sh, uninstall.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 1
 
 - **User Story (business-facing)**: As a contributor, I want all shell scripts to pass ShellCheck static analysis, so that common bash pitfalls (unquoted variables, deprecated patterns, unreachable code) are caught before release.
