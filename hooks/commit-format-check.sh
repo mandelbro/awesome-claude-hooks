@@ -2,8 +2,12 @@
 # Commit Format Check Hook — blocks git commits with non-conventional messages.
 # Runs on: PreToolUse (Bash). Exit 2 = block the command.
 
-INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null)
+source "$(dirname "$0")/lib/common.sh"
+
+parse_input || exit 2
+
+# Extract command from tool_input (not directly parsed by parse_input)
+COMMAND=$(echo "$HOOK_INPUT" | jq -r '.tool_input.command // empty')
 
 # Only check git commit commands
 if ! echo "$COMMAND" | grep -q 'git commit'; then

@@ -16,7 +16,7 @@ Completes the P0 security fixes (silent failures, Bash secrets bypass) with regr
 
 - **Title**: Integrate require_jq and set -u into blocking hooks
 - **File**: hooks/secrets-check.sh, hooks/file-org-check.sh, hooks/commit-format-check.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a Claude Code user, I want blocking hooks (PreToolUse) to fail loudly when jq is missing, so that a broken dependency does not silently disable my security enforcement.
@@ -66,7 +66,7 @@ For each of the three PreToolUse hooks:
 
 - **Title**: Implement Bash command secrets scanning with settings.json matcher
 - **File**: hooks/secrets-check.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 5
 
 - **User Story (business-facing)**: As a Claude Code user, I want secrets detection to also scan Bash commands that write files, so that shell redirections writing credentials are caught the same way direct file writes are caught.
@@ -133,7 +133,7 @@ Document that the secrets-check matcher in `config/settings-hooks.json` (created
 
 - **Title**: Write regression tests for Bash secrets scanning and silent failure fixes
 - **File**: tests/test-secrets.sh, tests/test-health-check.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a hook developer, I want regression tests covering the Bash secrets bypass fix and the silent failure fixes, so that these critical security improvements cannot regress undetected.

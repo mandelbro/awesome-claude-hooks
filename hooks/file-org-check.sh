@@ -2,29 +2,29 @@
 # File Organization Check Hook — blocks new files in project root that belong in subdirectories.
 # Runs on: PreToolUse (Write). Exit 2 = block the action.
 
-INPUT=$(cat)
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty' 2>/dev/null)
-CWD=$(echo "$INPUT" | jq -r '.cwd // empty' 2>/dev/null)
+source "$(dirname "$0")/lib/common.sh"
+
+parse_input || exit 2
 
 # No file path or cwd — can't check
-if [ -z "$FILE_PATH" ] || [ -z "$CWD" ]; then
+if [ -z "$HOOK_FILE_PATH" ] || [ -z "$HOOK_CWD" ]; then
   exit 0
 fi
 
 # Get the directory containing the file
-FILE_DIR=$(dirname "$FILE_PATH")
+FILE_DIR=$(dirname "$HOOK_FILE_PATH")
 
 # Only check files directly in the project root
-if [ "$FILE_DIR" != "$CWD" ]; then
+if [ "$FILE_DIR" != "$HOOK_CWD" ]; then
   exit 0
 fi
 
 # Only check if file doesn't already exist (new files only)
-if [ -f "$FILE_PATH" ]; then
+if [ -f "$HOOK_FILE_PATH" ]; then
   exit 0
 fi
 
-FILENAME=$(basename "$FILE_PATH")
+FILENAME=$(basename "$HOOK_FILE_PATH")
 
 # Allow standard root files (configs, dotfiles, build files)
 case "$FILENAME" in
