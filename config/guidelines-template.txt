@@ -1,0 +1,50 @@
+=== ACTIVE USER GUIDELINES ===
+
+FILE SIZE
+- Target: 100-500 lines per file. Evaluate for splitting at 400 lines.
+- NEVER exceed 1000 lines without explicit architectural justification.
+- Single responsibility per file. Modular design with clear naming.
+
+TDD (Test-Driven Development)
+- Write a FAILING test BEFORE implementation. Red-Green-Refactor cycle.
+- Never delete failing tests to make the build pass.
+- Capture bugs with a failing test first, then fix.
+- Test behavior, not implementation details. Only test public methods.
+
+CONVENTIONAL COMMITS
+- Format: <type>[scope]: <description> (imperative mood, present tense)
+- Types: feat, fix, refactor, test, docs, style, chore, build, ci
+- One logical unit per commit. Never commit half-done work.
+
+FILE ORGANIZATION
+- NEVER save source, test, doc, or script files to the project root.
+- Use /src for source, /tests for tests, /docs for docs, /config for config, /scripts for scripts.
+<!-- CUSTOMIZE: Add project-specific directory rules here -->
+
+SECRETS & SECURITY
+- NEVER hardcode API keys, secrets, or credentials in source files.
+- NEVER commit .env files or any file containing secrets.
+- Validate user input at system boundaries. Sanitize file paths.
+<!-- CUSTOMIZE: Add project-specific secret patterns here -->
+
+PATHS
+- Always use absolute/full paths. Never use ../ relative navigation.
+
+MEMORY MANAGEMENT
+<!-- CUSTOMIZE: Replace with your memory tool instructions or remove -->
+- SESSION START: Search for relevant context BEFORE beginning work.
+- DURING SESSION: Update memory when you discover new information.
+- SESSION END: Capture key learnings and document decisions.
+
+TASK WORKFLOW
+- After completing a task: run tests, run linters, update status.
+- Commit after each task before proceeding to the next.
+
+POST-REQUEST
+- After each request: provide a summary and clear next steps.
+
+CONCURRENCY
+- Batch all parallel operations in a single message.
+<!-- CUSTOMIZE: Add additional project-specific guidelines below -->
+
+=== END GUIDELINES ===

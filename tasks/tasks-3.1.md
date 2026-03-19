@@ -16,7 +16,7 @@ Configuration files, installer, uninstaller, and README for public distribution 
 
 - **Title**: Create settings-hooks.json configuration file
 - **File**: config/settings-hooks.json
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a user installing the hooks system, I want a JSON configuration file defining all hook entries, so that the installer can merge them into my existing Claude Code settings without manual editing.
@@ -66,7 +66,7 @@ Configuration files, installer, uninstaller, and README for public distribution 
 
 - **Title**: Create guidelines-template.txt customization file
 - **File**: config/guidelines-template.txt
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 1
 
 - **User Story (business-facing)**: As a user installing the hooks system, I want a template file for my guidelines content, so that I can customize the guidelines-reminder hook with my own rules before installation.
@@ -111,7 +111,7 @@ Configuration files, installer, uninstaller, and README for public distribution 
 
 - **Title**: Create install.sh interactive installer
 - **File**: install.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 8
 
 - **User Story (business-facing)**: As a reader of the hooks article, I want a single install command that sets up the complete hooks system, so that I can start using enforcement hooks without manually copying files and editing settings.
@@ -257,7 +257,7 @@ Configuration files, installer, uninstaller, and README for public distribution 
 
 - **Title**: Create uninstall.sh removal script
 - **File**: uninstall.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a user who wants to remove the hooks system, I want a clean uninstall script that removes only the hooks this system installed, so that other Claude Code configuration is preserved.
