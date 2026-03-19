@@ -5,35 +5,24 @@
 # Format: TIMESTAMP:TYPE:PATH (e.g., 1710700000:SRC:src/auth/middleware.py)
 
 source "$(dirname "$0")/lib/common.sh"
+parse_input || exit 0
 
-INPUT=$(cat)
-SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // "unknown"' 2>/dev/null)
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty' 2>/dev/null)
+[ -z "$HOOK_FILE_PATH" ] && exit 0
 
-# Nothing to track
-if [ -z "$FILE_PATH" ]; then
-  exit 0
-fi
-
-TRACKER="/tmp/claude-tdd-tracker-${SESSION_ID}"
-FILENAME=$(basename "$FILE_PATH")
+TRACKER=$(session_tmp "tdd-tracker")
 TIMESTAMP=$(date +%s)
 
-# Skip non-code files
-case "$FILENAME" in
-  *.md|*.txt|*.json|*.yaml|*.yml|*.toml|*.cfg|*.ini|*.lock|*.sh|*.env*)
-    exit 0
-    ;;
-esac
+# Use classify_file to determine file type
+FILE_TYPE=$(classify_file "$HOOK_FILE_PATH")
 
-# Classify as test or source file
-case "$FILE_PATH" in
-  *test*|*spec*|*__tests__*|*__mocks__*|*/tests/*|*/spec/*)
-    echo "${TIMESTAMP}:TEST:${FILE_PATH}" >> "$TRACKER"
+case "$FILE_TYPE" in
+  test)
+    echo "${TIMESTAMP}:TEST:${HOOK_FILE_PATH}" >> "$TRACKER"
     ;;
-  *.py|*.ts|*.tsx|*.js|*.jsx|*.rb|*.go|*.rs|*.java)
-    echo "${TIMESTAMP}:SRC:${FILE_PATH}" >> "$TRACKER"
+  source)
+    echo "${TIMESTAMP}:SRC:${HOOK_FILE_PATH}" >> "$TRACKER"
     ;;
+  # config/other — not tracked for TDD purposes
 esac
 
 exit 0

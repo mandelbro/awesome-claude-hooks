@@ -5,17 +5,10 @@
 # No LLM, no JSON validation — pure deterministic check.
 
 source "$(dirname "$0")/lib/common.sh"
+parse_input || exit 0
+guard_stop_loop
 
-INPUT=$(cat)
-
-# Check stop_hook_active to avoid loops
-STOP_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false' 2>/dev/null)
-if [ "$STOP_ACTIVE" = "true" ]; then
-  exit 0
-fi
-
-SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // "unknown"' 2>/dev/null)
-TRACKER="/tmp/claude-tdd-tracker-${SESSION_ID}"
+TRACKER=$(session_tmp "tdd-tracker")
 
 # No tracker file means no source files were written this cycle
 if [ ! -f "$TRACKER" ]; then

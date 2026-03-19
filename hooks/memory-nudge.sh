@@ -3,16 +3,12 @@
 # Runs on: Stop event. Every 3rd invocation outputs a reminder.
 # Uses a temp counter file keyed by session_id.
 
-INPUT=$(cat)
+source "$(dirname "$0")/lib/common.sh"
+parse_input || exit 0  # Stop hooks cannot block
 
-# Check stop_hook_active to avoid contributing to infinite loops
-STOP_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false' 2>/dev/null)
-if [ "$STOP_ACTIVE" = "true" ]; then
-  exit 0
-fi
+guard_stop_loop
 
-SESSION_ID=$(echo "$INPUT" | jq -r '.session_id // "unknown"' 2>/dev/null)
-COUNTER_FILE="/tmp/claude-memory-nudge-${SESSION_ID}"
+COUNTER_FILE="$(session_tmp "memory-nudge-counter")"
 
 # Initialize or increment counter
 if [ -f "$COUNTER_FILE" ]; then

@@ -120,7 +120,7 @@ Produce a spike document that covers:
 
 - **Title**: Migrate Layer 1 hooks to shared library (guidelines, pre-compact)
 - **File**: hooks/guidelines-reminder.sh, hooks/pre-compact-guidelines.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a hook developer, I want all hooks to use the shared library consistently, so that boilerplate is eliminated and future maintenance touches one place instead of ten.
@@ -175,7 +175,7 @@ Produce a spike document that covers:
 
 - **Title**: Migrate Layer 2 blocking hooks to shared library
 - **File**: hooks/secrets-check.sh, hooks/file-org-check.sh, hooks/commit-format-check.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a hook developer, I want the Layer 2 blocking hooks fully migrated to shared library patterns, so that content extraction, file classification, and error handling are consistent across all enforcement hooks.
@@ -230,7 +230,7 @@ For each hook, replace remaining duplicated logic:
 
 - **Title**: Migrate PostToolUse hooks to shared library
 - **File**: hooks/file-size-check.sh, hooks/tdd-tracker.sh, hooks/memory-ops-confirm.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 3
 
 - **User Story (business-facing)**: As a hook developer, I want PostToolUse hooks migrated to the shared library, so that file size checking, TDD tracking, and memory operation logging all benefit from consistent input parsing and error handling.
@@ -287,7 +287,7 @@ For each hook, replace remaining duplicated logic:
 
 - **Title**: Migrate Stop hooks to shared library
 - **File**: hooks/tdd-reminder.sh, hooks/memory-nudge.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a hook developer, I want Stop hooks migrated to the shared library so that the stop_hook_active guard and session temp file patterns are centralized and consistent.
@@ -345,7 +345,7 @@ For each hook, replace remaining duplicated logic:
 
 - **Title**: Add defensive error handling to memory-ops-confirm.sh
 - **File**: hooks/memory-ops-confirm.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 1
 
 - **User Story (business-facing)**: As a hook developer, I want memory-ops-confirm.sh to handle unrecognized tools explicitly, so that matcher configuration drift does not produce silent no-ops.
@@ -388,7 +388,7 @@ For each hook, replace remaining duplicated logic:
 
 - **Title**: Document stop_hook_active requirement for new hooks
 - **File**: docs/exit-codes.md
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 1
 
 - **User Story (business-facing)**: As a hook developer adding new Stop hooks, I want clear documentation about the stop_hook_active guard requirement, so that I do not accidentally create an infinite loop.
