@@ -120,7 +120,7 @@ Establishes the settings schema baseline, copies existing hooks, builds the shar
 
 - **Title**: Create shared utilities library (lib/common.sh)
 - **File**: hooks/lib/common.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 5
 
 - **User Story (business-facing)**: As a hook developer, I want a shared utilities library with input parsing, file classification, and dependency validation, so that all hooks use consistent, tested, and fail-loud patterns instead of duplicated boilerplate.
@@ -304,7 +304,7 @@ All secret/credential values in fixtures must be obviously fake test values. Ref
 
 - **Title**: Write baseline tests for existing hook behavior
 - **File**: tests/test-secrets.sh, tests/test-file-org.sh, tests/test-commit.sh, tests/test-file-size.sh, tests/test-tdd.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 8
 
 - **User Story (business-facing)**: As a hook developer, I want baseline tests that validate current hook behavior, so that I can refactor and improve hooks with confidence that existing functionality is preserved.
@@ -371,7 +371,7 @@ Each test file should define `test_*` functions. Use the `run_hook` helper from 
 
 - **Title**: Create hook-health-check.sh (SessionStart dependency validation)
 - **File**: hooks/hook-health-check.sh
-- **Complete**: [ ]
+- **Complete**: [x]
 - **Sprint Points**: 2
 
 - **User Story (business-facing)**: As a Claude Code user, I want to be warned at session start if hook dependencies are missing or misconfigured, so that I know immediately when my enforcement system is degraded.
