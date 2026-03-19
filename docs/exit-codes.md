@@ -10,7 +10,7 @@
 
 Only PreToolUse hooks can block actions. All other lifecycle events ignore exit codes.
 
-## The "Fails Open" Design
+### The "Fails Open" Design
 
 Exit code 1 means "this hook crashed." Claude Code treats crashes as non-blocking to avoid a broken hook stopping all work. This is by design, but it means:
 
@@ -18,7 +18,7 @@ Exit code 1 means "this hook crashed." Claude Code treats crashes as non-blockin
 - **Syntax errors**: A bash error in a security hook silently stops protecting you
 - **Mitigation**: Use `require_jq` from `lib/common.sh` and convert parse failures to `exit 2` in PreToolUse hooks
 
-## Choosing the Right Exit Code
+### Choosing the Right Exit Code
 
 **PreToolUse hooks (blocking):**
 - `exit 0` — action is safe, allow it
@@ -30,23 +30,43 @@ Exit code 1 means "this hook crashed." Claude Code treats crashes as non-blockin
 - `exit 1` — acceptable for errors (action already happened or hasn't started)
 - Output goes to stdout as context for Claude
 
-## Stop Hook Guard Requirement
+## Stop Hook Guard: Preventing Infinite Loops
 
 Stop hooks MUST check `stop_hook_active` before producing output. When a Stop hook emits output, Claude processes it, which triggers another Stop event. Without the guard, this creates an infinite loop.
 
-**How `guard_stop_loop()` works:**
+### The `stop_hook_active` Flag
+
+Claude Code passes `"stop_hook_active": true` in the JSON input when a stop event was triggered by a previous stop hook's output. Hooks must check this flag and exit immediately when it is `true`.
+
+### Using `guard_stop_loop` from `hooks/lib/common.sh`
+
 ```bash
 source "$(dirname "$0")/lib/common.sh"
 parse_input || exit 0
-guard_stop_loop  # exits 0 if stop_hook_active is true
+guard_stop_loop  # exits 0 immediately if stop_hook_active is true
+
+# ... rest of hook logic only runs on genuine stop events ...
 ```
 
-All new Stop hooks MUST use `guard_stop_loop()` or implement the check manually.
+This replaces the manual pattern that was previously used:
+
+```bash
+# OLD (manual) — replaced by guard_stop_loop
+STOP_ACTIVE=$(echo "$INPUT" | jq -r '.stop_hook_active // false')
+if [ "$STOP_ACTIVE" = "true" ]; then
+  exit 0
+fi
+```
+
+All Stop hooks MUST use `guard_stop_loop()` or implement the check manually.
 
 ## Hook Execution Order
 
-Within a lifecycle event, hooks run in array order. If an earlier PreToolUse hook exits 2, later hooks in the same event do NOT run. This means:
-- `secrets-check.sh` must come before `commit-format-check.sh` in PreToolUse
-- A blocked secret write prevents the commit format checker from running (correct behavior)
+Within a lifecycle event, hooks run in the order listed in `settings.json`. For PreToolUse hooks:
 
-This ordering is configured in `config/settings-hooks.json`.
+- If an earlier hook exits with `2` (block), later hooks for the same event are **not executed**
+- If an earlier hook exits with `0` or `1`, later hooks still run
+
+This means ordering matters: place the most critical blocking hooks (e.g., `secrets-check.sh`) before advisory hooks. A blocked secret write correctly prevents the commit format checker from running.
+
+Hook ordering is configured in `config/settings-hooks.json`.

@@ -1,6 +1,107 @@
 {
-  "description": "Hook system configuration placeholder",
-  "notes": {
-    "secrets-check": "Bash must be included in the secrets-check matcher pattern (Write|Edit|MultiEdit|Bash) for command-level secret scanning to work."
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/hook-health-check.sh",
+            "timeout": 3000
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/guidelines-reminder.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/pre-compact-guidelines.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/secrets-check.sh",
+            "timeout": 3000
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/file-org-check.sh",
+            "timeout": 3000
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/commit-format-check.sh",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/file-size-check.sh",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/tdd-tracker.sh",
+            "timeout": 3000
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__graphiti-memory__.*|mcp__pi-brain__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/memory-ops-confirm.sh",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/memory-nudge.sh",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/tdd-reminder.sh",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
   }
 }
